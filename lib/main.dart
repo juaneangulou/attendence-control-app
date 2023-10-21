@@ -1,6 +1,7 @@
 import 'package:attendance_control_app/models/database.dart';
+import 'package:attendance_control_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'screens/container_screen.dart';
 import 'screens/course_create_screen.dart';
 import 'screens/user_create_screen.dart';
 import 'screens/user_course_link_screen.dart';
@@ -18,11 +19,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Attendance Control App',
+      home: ContainerScreen(databaseProvider),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: AppRoutes.home,
+      
+      initialRoute: AppRoutes.dashboard,
       routes: {
+        AppRoutes.dashboard: (context) => ContainerScreen(databaseProvider),
         AppRoutes.home: (context) => HomeScreen(databaseProvider),
         AppRoutes.courseCreate: (context) =>
             CourseCreateScreen(databaseProvider),
@@ -37,6 +41,7 @@ class MyApp extends StatelessWidget {
 }
 
 class AppRoutes {
+  static const dashboard = '/dashboard';
   static const home = '/home';
   static const courseCreate = '/course_create';
   static const userCreate = '/user_create';
